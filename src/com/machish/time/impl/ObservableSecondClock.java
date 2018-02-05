@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import com.machish.annotations.ThreadSafe;
 import com.machish.time.model.Clockable;
 import com.machish.time.model.ObservableClock;
 import com.machish.time.model.Tick;
@@ -23,25 +24,26 @@ import com.machish.time.model.Tick;
  * 
  * @author mihirsathe
  */
+@ThreadSafe
 public class ObservableSecondClock implements ObservableClock {
 
-	/**
-	 * Clockables to notify of ticks.
-	 */
-	private final List<Clockable> clockables;
+    /**
+     * Clockables to notify of ticks.
+     */
+    private final List<Clockable> clockables;
 
-	private final AtomicLong tickSeconds;
-	private final Lock tickLock;
+    private final AtomicLong tickSeconds;
+    private final Lock tickLock;
 
-	public ObservableSecondClock() {
-		this(0L);
-	}
+    public ObservableSecondClock() {
+        this(0L);
+    }
 
-	public ObservableSecondClock(final long tickSeconds) {
-		this.tickSeconds = new AtomicLong(tickSeconds);
-		this.tickLock = new ReentrantLock();
-		this.clockables = new ArrayList<>();
-	}
+    public ObservableSecondClock(final long tickSeconds) {
+        this.tickSeconds = new AtomicLong(tickSeconds);
+        this.tickLock = new ReentrantLock();
+        this.clockables = new ArrayList<>();
+    }
 
     @Override
     public void addClockable(final Clockable clockable) {
