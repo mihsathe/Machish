@@ -17,6 +17,6 @@ public interface ObservableClock {
 	/**
 	 * Tick the clock for all the clockables registered with this clock.
 	 */
-	public void clock();
+	public void tick();
 
 }
